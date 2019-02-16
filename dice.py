@@ -7,6 +7,7 @@ BLANK = Face('blank', '<:base_blank:545643568677519370>', 0, 0, 0)
 
 class Die:
     faces = [BLANK]
+    countable = False
 
     def __init__(self):
         self.active = BLANK
@@ -20,15 +21,19 @@ class Die:
 
 
 class D6(Die):
-    faces = [Face('d6_one', '<:d6_one:546326217385836565>', 1, 0, 1),
-             Face('d6_two', '<:d6_two:546326217561997315>', 2, 0, 1),
-             Face('d6_three', '<:d6_three:546326217633169408>', 3, 0, 1),
-             Face('d6_four', '<:d6_four:546326217633300512>', 4, 0, 1),
-             Face('d6_five', '<:d6_five:546326217545089024>', 5, 0, 1),
-             Face('d6_six', '<:d6_six:546326217876570123>', 6, 0, 1)]
+    faces = [Face('d6_one', '<:d6_one:546326217385836565>', 1, 0, 0),
+             Face('d6_two', '<:d6_two:546326217561997315>', 2, 0, 0),
+             Face('d6_three', '<:d6_three:546326217633169408>', 3, 0, 0),
+             Face('d6_four', '<:d6_four:546326217633300512>', 4, 0, 0),
+             Face('d6_five', '<:d6_five:546326217545089024>', 5, 0, 0),
+             Face('d6_six', '<:d6_six:546326217876570123>', 6, 0, 0)]
+
+    async def pushable(self):
+        return False
 
 
 class Base(Die):
+    countable = True
     faces = [Face('base_one', '<:base_one:545643569218584638>', 1, 0, 1),
              Face('base_two', '<:base_blank:545643568677519370>', 2, 0, 0),
              Face('base_three', '<:base_blank:545643568677519370>', 3, 0, 0),
@@ -38,6 +43,7 @@ class Base(Die):
 
 
 class Skill(Die):
+    countable = True
     faces = [Face('skill_one', '<:skill_blank:545643939139682314>', 1, 0, 0),
              Face('skill_two', '<:skill_blank:545643939139682314>', 2, 0, 0),
              Face('skill_three', '<:skill_blank:545643939139682314>', 3, 0, 0),
@@ -47,6 +53,7 @@ class Skill(Die):
 
 
 class Gear(Die):
+    countable = True
     faces = [Face('gear_one', '<:gear_one:545646496691912704>', 1, 0, 1),
              Face('gear_two', '<:gear_blank:545646496586924035>', 2, 0, 0),
              Face('gear_three', '<:gear_blank:545646496586924035>', 3, 0, 0),
@@ -56,6 +63,7 @@ class Gear(Die):
 
 
 class D8(Die):
+    countable = True
     faces = [Face('d8_one', '<:d8_blank:545646540782436365>', 1, 0, 0),
              Face('d8_two', '<:d8_blank:545646540782436365>', 2, 0, 0),
              Face('d8_three', '<:d8_blank:545646540782436365>', 3, 0, 0),
@@ -67,6 +75,7 @@ class D8(Die):
 
 
 class D10(Die):
+    countable = True
     faces = [Face('d10_one', '<:d10_blank:545646579831275541>', 1, 0, 0),
              Face('d10_two', '<:d10_blank:545646579831275541>', 2, 0, 0),
              Face('d10_three', '<:d10_blank:545646579831275541>', 3, 0, 0),
@@ -80,6 +89,7 @@ class D10(Die):
 
 
 class D12(Die):
+    countable = True
     faces = [Face('d12_one', '<:d12_blank:545646598093537282>', 1, 0, 0),
              Face('d12_two', '<:d12_blank:545646598093537282>', 2, 0, 0),
              Face('d12_three', '<:d12_blank:545646598093537282>', 3, 0, 0),
@@ -95,48 +105,60 @@ class D12(Die):
 
 
 class ResourceD6(Die):
-    faces = [Face('resource_d6_one', '<:skill_one:546398615409655830>', 1, 0, 1),
-             Face('resource_d6_two', '<:skill_one:546398615409655830>', 2, 0, 1),
-             Face('resource_d6_three', '<:skill_blank:545643939139682314>', 3, 0, 1),
-             Face('resource_d6_four', '<:skill_blank:545643939139682314>', 4, 0, 1),
-             Face('resource_d6_five', '<:skill_blank:545643939139682314>', 5, 0, 1),
-             Face('resource_d6_six', '<:skill_blank:545643939139682314>', 6, 0, 1)]
+    faces = [Face('resource_d6_one', '<:skill_one:546398615409655830>', 1, 0, 0),
+             Face('resource_d6_two', '<:skill_one:546398615409655830>', 2, 0, 0),
+             Face('resource_d6_three', '<:skill_blank:545643939139682314>', 3, 0, 0),
+             Face('resource_d6_four', '<:skill_blank:545643939139682314>', 4, 0, 0),
+             Face('resource_d6_five', '<:skill_blank:545643939139682314>', 5, 0, 0),
+             Face('resource_d6_six', '<:skill_blank:545643939139682314>', 6, 0, 0)]
+
+    async def pushable(self):
+        return False
 
 
 class ResourceD8(Die):
-    faces = [Face('resource_d8_one', '<:d8_one:546398614847619082>', 1, 0, 1),
-             Face('resource_d8_two', '<:d8_one:546398614847619082>', 2, 0, 1),
-             Face('resource_d8_three', '<:d8_blank:545646540782436365>', 3, 0, 1),
-             Face('resource_d8_four', '<:d8_blank:545646540782436365>', 4, 0, 1),
-             Face('resource_8_five', '<:d8_blank:545646540782436365>', 5, 0, 1),
-             Face('resource_d8_six', '<:d8_blank:545646540782436365>', 6, 0, 1),
-             Face('resource_d8_seven', '<:d8_blank:545646540782436365>', 7, 0, 1),
-             Face('resource_d8_eight', '<:d8_blank:545646540782436365>', 8, 0, 1)]
+    faces = [Face('resource_d8_one', '<:d8_one:546398614847619082>', 1, 0, 0),
+             Face('resource_d8_two', '<:d8_one:546398614847619082>', 2, 0, 0),
+             Face('resource_d8_three', '<:d8_blank:545646540782436365>', 3, 0, 0),
+             Face('resource_d8_four', '<:d8_blank:545646540782436365>', 4, 0, 0),
+             Face('resource_8_five', '<:d8_blank:545646540782436365>', 5, 0, 0),
+             Face('resource_d8_six', '<:d8_blank:545646540782436365>', 6, 0, 0),
+             Face('resource_d8_seven', '<:d8_blank:545646540782436365>', 7, 0, 0),
+             Face('resource_d8_eight', '<:d8_blank:545646540782436365>', 8, 0, 0)]
+
+    async def pushable(self):
+        return False
 
 
 class ResourceD10(Die):
-    faces = [Face('resource_d10_one', '<:d10_one:546398614705012757>', 1, 0, 1),
-             Face('resource_d10_two', '<:d10_one:546398614705012757>', 2, 0, 1),
-             Face('resource_d10_three', '<:d10_blank:545646579831275541>', 3, 0, 1),
-             Face('resource_d10_four', '<:d10_blank:545646579831275541>', 4, 0, 1),
-             Face('resource_d10_five', '<:d10_blank:545646579831275541>', 5, 0, 1),
-             Face('resource_d10_six', '<:d10_blank:545646579831275541>', 6, 0, 1),
-             Face('resource_d10_seven', '<:d10_blank:545646579831275541>', 7, 0, 1),
-             Face('resource_d10_eight', '<:d10_blank:545646579831275541>', 8, 0, 1),
-             Face('resource_d10_nine', '<:d10_blank:545646579831275541>', 9, 0, 1),
-             Face('resource_d10_ten', '<:d10_blank:545646579831275541>', 10, 0, 1)]
+    faces = [Face('resource_d10_one', '<:d10_one:546398614705012757>', 1, 0, 0),
+             Face('resource_d10_two', '<:d10_one:546398614705012757>', 2, 0, 0),
+             Face('resource_d10_three', '<:d10_blank:545646579831275541>', 3, 0, 0),
+             Face('resource_d10_four', '<:d10_blank:545646579831275541>', 4, 0, 0),
+             Face('resource_d10_five', '<:d10_blank:545646579831275541>', 5, 0, 0),
+             Face('resource_d10_six', '<:d10_blank:545646579831275541>', 6, 0, 0),
+             Face('resource_d10_seven', '<:d10_blank:545646579831275541>', 7, 0, 0),
+             Face('resource_d10_eight', '<:d10_blank:545646579831275541>', 8, 0, 0),
+             Face('resource_d10_nine', '<:d10_blank:545646579831275541>', 9, 0, 0),
+             Face('resource_d10_ten', '<:d10_blank:545646579831275541>', 10, 0, 0)]
+
+    async def pushable(self):
+        return False
 
 
 class ResourceD12(Die):
-    faces = [Face('resource_d12_one', '<:d12_one:546398614667133006>', 1, 0, 1),
-             Face('resource_d12_two', '<:d12_one:546398614667133006>', 2, 0, 1),
-             Face('resource_d12_three', '<:d12_blank:545646598093537282>', 3, 0, 1),
-             Face('resource_d12_four', '<:d12_blank:545646598093537282>', 4, 0, 1),
-             Face('resource_d12_five', '<:d12_blank:545646598093537282>', 5, 0, 1),
-             Face('resource_d12_six', '<:d12_blank:545646598093537282>', 6, 0, 1),
-             Face('resource_d12_seven', '<:d12_blank:545646598093537282>', 7, 0, 1),
-             Face('resource_d12_eight', '<:d12_blank:545646598093537282>', 8, 0, 1),
-             Face('resource_d12_nine', '<:d12_blank:545646598093537282>', 9, 0, 1),
-             Face('resource_d12_ten', '<:d12_blank:545646598093537282>', 10, 0, 1),
-             Face('resource_d12_eleven', '<:d12_blank:545646598093537282>', 11, 0, 1),
-             Face('resource_d12_twelve', '<:d12_blank:545646598093537282>', 12, 0, 1)]
+    faces = [Face('resource_d12_one', '<:d12_one:546398614667133006>', 1, 0, 0),
+             Face('resource_d12_two', '<:d12_one:546398614667133006>', 2, 0, 0),
+             Face('resource_d12_three', '<:d12_blank:545646598093537282>', 3, 0, 0),
+             Face('resource_d12_four', '<:d12_blank:545646598093537282>', 4, 0, 0),
+             Face('resource_d12_five', '<:d12_blank:545646598093537282>', 5, 0, 0),
+             Face('resource_d12_six', '<:d12_blank:545646598093537282>', 6, 0, 0),
+             Face('resource_d12_seven', '<:d12_blank:545646598093537282>', 7, 0, 0),
+             Face('resource_d12_eight', '<:d12_blank:545646598093537282>', 8, 0, 0),
+             Face('resource_d12_nine', '<:d12_blank:545646598093537282>', 9, 0, 0),
+             Face('resource_d12_ten', '<:d12_blank:545646598093537282>', 10, 0, 0),
+             Face('resource_d12_eleven', '<:d12_blank:545646598093537282>', 11, 0, 0),
+             Face('resource_d12_twelve', '<:d12_blank:545646598093537282>', 12, 0, 0)]
+
+    async def pushable(self):
+        return False
