@@ -6,8 +6,8 @@ import os
 from discord import Game, Message
 from discord.ext.commands import Bot
 
-TOKEN = os.environ['token']
-BOT_PREFIX = os.environ['prefix']
+TOKEN = os.environ.get('token')
+BOT_PREFIX = os.environ.get('prefix')
 
 client = Bot(command_prefix=BOT_PREFIX)
 REGEX = {re.compile('(\d+)(ba|ge)'): dice.Base,
