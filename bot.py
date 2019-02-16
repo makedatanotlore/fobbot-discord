@@ -101,12 +101,12 @@ async def swedish_help(context):
                     f'Artefakttärning T10 - `t10`\n'
                     f'Artefakttärning T12 - `t12`',
                     inline=False)
-    embed.add_field(name='Resurstärningar',
+    embed.add_field(name='Resurstärningar (<:ss_bane:546280456828485632> - 1/2)',
                     value=f'Resurstärning T6 - `rest6`\n'
                     f'Resurstärning T8 - `rest8`\n'
                     f'Resurstärning T10 - `rest10`\n'
                     f'Resurstärning T12 - `rest12`\n',
-                    inline=False)
+                    inline=True)
 
     await context.message.channel.send(embed=embed)
 
@@ -128,11 +128,11 @@ async def english_help(context):
                     f'Base Attribute Die - `ba`\n'
                     f'Skill Die - `sk`\n'
                     f'Gear/Weapon Die - `gr/wp`\n'
-                    f'Artifact D8 - `d8`\n'
-                    f'Artifact D10 - `d10`\n'
-                    f'Artifact D12 - `d12`',
+                    f'Artifact Die D8 - `d8`\n'
+                    f'Artifact Die D10 - `d10`\n'
+                    f'Artifact Die D12 - `d12`',
                     inline=False)
-    embed.add_field(name='Resource Dice',
+    embed.add_field(name='Resource Dice (<:ss_bane:546280456828485632> - 1/2)',
                     value=f'Resource Die D6 - `resd6`\n'
                     f'Resource Die D8 - `resd8`\n'
                     f'Resource Die D10 - `resd10`\n'
