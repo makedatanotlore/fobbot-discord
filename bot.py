@@ -154,7 +154,8 @@ async def embed_template(context, dicepool, roll_count):
             title=f'**\#{roll_count}**   {swords}x<:left_align_swords:546440106500816926> {skulls}x<:left_align_skull:546440106681171970>',
             color=context.message.author.color)
     else:
-        embed = discord.Embed(title=' ')
+        embed = discord.Embed(title=' ',
+                              color=context.message.author.color)
 
     embed.set_author(name=context.message.author.display_name,
                      icon_url=context.message.author.avatar_url)
