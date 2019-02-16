@@ -10,6 +10,8 @@ TOKEN = os.environ.get('token')
 BOT_PREFIX = os.environ.get('prefix')
 
 client = Bot(command_prefix=BOT_PREFIX)
+client.remove_command('help')
+
 REGEX = {re.compile('(\d+)(d6|t6)'): dice.D6,
          re.compile('(\d+)(ba|ge)'): dice.Base,
          re.compile('(\d+)(sk|fv)'): dice.Skill,
@@ -71,7 +73,7 @@ async def roll(context):
 
 @client.command(name='hjälp',
                 pass_context=True)
-async def help_swedish(context):
+async def swedish_help(context):
     if context.message.author.bot:
         return
 
@@ -96,7 +98,7 @@ async def help_swedish(context):
 
 @client.command(name='help',
                 pass_context=True)
-async def help_english(context):
+async def english_help(context):
     if context.message.author.bot:
         return
 
