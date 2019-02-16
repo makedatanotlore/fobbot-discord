@@ -58,7 +58,7 @@ async def roll(context):
 
             try:
                 await client.wait_for('reaction_add', timeout=60.0,
-                                      check=lambda reaction, user: str(reaction.emoji) == '🔄' and user is context.message.author and reaction.message is message)
+                                      check=lambda reaction, user: str(reaction.emoji) == '🔄' and user == context.message.author and reaction.message.id == message.id)
             except asyncio.TimeoutError:
                 await Message.clear_reactions(message)
                 return
