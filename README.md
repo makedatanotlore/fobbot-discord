@@ -10,3 +10,6 @@
 
 ## Add Fobbot to your own server
 https://discordapp.com/api/oauth2/authorize?client_id=545345647390490640&permissions=288832
+
+## Contact
+Hit me up on Discord if you've any questions - Visetharm#8462
