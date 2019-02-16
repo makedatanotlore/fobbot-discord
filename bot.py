@@ -47,8 +47,8 @@ async def roll(context):
     for die in dicepool:
             await die.roll()
 
-    embed = await embed_template(context, dicepool)
-    message = await context.message.channel.send(embed=embed)
+    embed = await embed_template(context)
+    message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
 
     while pushes > 0:
         if [die for die in dicepool if await die.pushable()]:
@@ -61,10 +61,10 @@ async def roll(context):
             for die in dicepool:
                 await die.roll()
 
-            embed = await embed_template(context, dicepool)
+            embed = await embed_template(context)
 
             await Message.clear_reactions(message)
-            await Message.edit(message, embed=embed)
+            await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
 
             pushes -= 1
         else:
@@ -121,10 +121,9 @@ async def english_help(context):
     await context.message.channel.send(embed=embed)
 
 
-async def embed_template(context, dicepool):
+async def embed_template(context):
     embed = discord.Embed(title=' ',
-                          color=context.message.author.color,
-                          description=''.join([die.active.emoji for die in dicepool]))
+                          color=context.message.author.color)
     embed.set_author(name=context.message.author.display_name,
                      icon_url=context.message.author.avatar_url)
 
