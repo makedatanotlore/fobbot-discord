@@ -56,12 +56,7 @@ async def roll(context):
         if [die for die in dicepool if await die.pushable()]:
             await Message.add_reaction(message, '🔄')
 
-            try:
-                await client.wait_for('reaction_add', timeout=60.0,
-                                      check=lambda reaction, user: str(reaction.emoji) == '🔄' and user == context.message.author and reaction.message == message)
-            except asyncio.TimeoutError:
-                await Message.clear_reactions(message)
-                return
+            await client.wait_for('reaction_add', timeout=600.0, check=lambda reaction, user: str(reaction.emoji) == '🔄' and user == context.message.author and reaction.message == message)
 
             for die in dicepool:
                 await die.roll()
