@@ -145,13 +145,13 @@ async def english_help(context):
 
 
 async def embed_template(context, dicepool, roll_count):
-    embed = discord.Embed(title=' ',
+    swords = sum([die.active.swords for die in dicepool])
+    skulls = sum([die.active.skulls for die in dicepool])
+
+    embed = discord.Embed(title=f'\#{roll_count}: *({swords})* <:fbl_swords:546433791216844801> *({skulls})* <:fbl_skull:546433791443468351>',
                           color=context.message.author.color)
     embed.set_author(name=context.message.author.display_name,
                      icon_url=context.message.author.avatar_url)
-    swords = sum([die.active.swords for die in dicepool])
-    skulls = sum([die.active.skulls for die in dicepool])
-    embed.set_footer(text=f'*\#{roll_count}: ({swords}) <:fbl_swords:546433791216844801> ({skulls}) <:fbl_skull:546433791443468351>*')
 
     return embed
 
