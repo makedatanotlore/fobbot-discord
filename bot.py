@@ -10,9 +10,10 @@ TOKEN = os.environ.get('token')
 BOT_PREFIX = os.environ.get('prefix')
 
 client = Bot(command_prefix=BOT_PREFIX)
-REGEX = {re.compile('(\d+)(ba|ge)'): dice.Base,
+REGEX = {re.compile('(\d+)(d6|t6)'): dice.D6,
+         re.compile('(\d+)(ba|ge)'): dice.Base,
          re.compile('(\d+)(sk|fv)'): dice.Skill,
-         re.compile('(\d+)(gr|rd)'): dice.Gear,
+         re.compile('(\d+)(gr|rd|vp|wp)'): dice.Gear,
          re.compile('(\d+)(d8|t8)'): dice.D8,
          re.compile('(\d+)(d10|t10)'): dice.D10,
          re.compile('(\d+)(d12|t12)'): dice.D12}
@@ -68,12 +69,54 @@ async def roll(context):
             return
 
 
-@client.command(name='stop',
+@client.command(name='hjälp',
                 pass_context=True)
-async def stop(context):
+async def help_swedish(context):
     if context.message.author.bot:
         return
-    await client.close()
+
+    embed = discord.Embed(title='Hjälp - Slå tärning',
+                          color=0xa2e600,
+                          description='För att slå tärning, ange antalet tärningar följt av tärningstypen.')
+    embed.add_field(name='Exempel',
+                    value='`>slå 5ge 2fv 2rd 1t8`',
+                    inline=False)
+    embed.add_field(name='Tärningstyper',
+                    value=f'Vanlig T6 - `t6`\n'
+                    f'Grundegenskapstärning - `ge`\n'
+                    f'Färdighetstärning - `fv`\n'
+                    f'Redskaps/vapentärning - `rd/vp`\n'
+                    f'Artefakttärning T8 - `t8`\n'
+                    f'Artefakttärning T10 - `t10`\n'
+                    f'Artefakttärning T12 - `t12`',
+                    inline=False)
+
+    await context.message.channel.send(embed=embed)
+
+
+@client.command(name='help',
+                pass_context=True)
+async def help_english(context):
+    if context.message.author.bot:
+        return
+
+    embed = discord.Embed(title='Help - Rolling the dice',
+                          color=0xa2e600,
+                          description='To roll the dice, enter the number of dice followed by the type.')
+    embed.add_field(name='Example usage',
+                    value='`>roll 5ba 2sk 2gr 1d8`',
+                    inline=False)
+    embed.add_field(name='Types of dice',
+                    value=f'Regular D6 - `d6`\n'
+                    f'Base Attribute Die - `ba`\n'
+                    f'Skill Die - `sk`\n'
+                    f'Gear/Weapon Die - `gr/wp`\n'
+                    f'Artifact D8 - `d8`\n'
+                    f'Artifact D10 - `d10`\n'
+                    f'Artifact D12 - `d12`',
+                    inline=False)
+
+    await context.message.channel.send(embed=embed)
 
 
 async def embed_template(context, dicepool):

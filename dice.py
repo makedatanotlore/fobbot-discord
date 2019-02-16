@@ -19,6 +19,15 @@ class Die:
         return self.active.swords == 0 and self.active.skulls == 0
 
 
+class D6(Die):
+    faces = [Face('d6_one', '<:d6_one:546326217385836565>', 1, 0, 1),
+             Face('d6_two', '<:d6_two:546326217561997315>', 2, 0, 1),
+             Face('d6_three', '<:d6_three:546326217633169408>', 3, 0, 1),
+             Face('d6_four', '<:d6_four:546326217633300512>', 4, 0, 1),
+             Face('d6_five', '<:d6_five:546326217545089024>', 5, 0, 1),
+             Face('d6_six', '<:d6_six:546326217876570123>', 6, 0, 1)]
+
+
 class Base(Die):
     faces = [Face('base_one', '<:base_one:545643569218584638>', 1, 0, 1),
              Face('base_two', '<:base_blank:545643568677519370>', 2, 0, 0),
