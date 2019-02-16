@@ -21,7 +21,7 @@ REGEX = {re.compile('(\d+)(d6|t6)'): dice.D6,
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.idle, activity=Game(name='>hjälp / >help'))
+    await client.change_presence(activity=Game(name='>hjälp / >help'))
 
 
 @client.command(name='slå',
