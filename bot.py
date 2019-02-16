@@ -53,7 +53,8 @@ async def roll(context):
     for die in dicepool:
             await die.roll()
 
-    embed = await embed_template(context)
+    roll_count = 1
+    embed = await embed_template(context, dicepool, roll_count)
     message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
 
     while pushes > 0:
@@ -67,10 +68,11 @@ async def roll(context):
                 await Message.clear_reactions(message)
                 return
 
+            roll_count += 1
             for die in dicepool:
                 await die.roll()
 
-            embed = await embed_template(context)
+            embed = await embed_template(context, dicepool, roll_count)
 
             await Message.clear_reactions(message)
             await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
@@ -142,11 +144,14 @@ async def english_help(context):
     await context.message.channel.send(embed=embed)
 
 
-async def embed_template(context):
+async def embed_template(context, dicepool, roll_count):
     embed = discord.Embed(title=' ',
                           color=context.message.author.color)
     embed.set_author(name=context.message.author.display_name,
                      icon_url=context.message.author.avatar_url)
+    swords = sum([die.active.swords for die in dicepool])
+    skulls = sum([die.active.skulls for die in dicepool])
+    embed.set_footer(text=f'*\#{roll_count}: ({swords}) <:fbl_swords:546433791216844801> ({skulls}) <:fbl_skull:546433791443468351>*')
 
     return embed
 
