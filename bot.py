@@ -45,7 +45,8 @@ async def roll(context):
     dicepool = await parse_args(context)
 
     if not dicepool:
-        embed = discord.Embed(title='<:ss_bane:546280456828485632>',
+        embed = discord.Embed(title='I am Error',
+                              description='<No valid arguments found>',
                               color=0xe60000)
         await context.message.channel.send(embed=embed)
         return
