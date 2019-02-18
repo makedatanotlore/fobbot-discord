@@ -14,17 +14,17 @@ BOT_PREFIX = os.environ.get('prefix')
 client = Bot(command_prefix=BOT_PREFIX)
 client.remove_command('help')
 
-REGEX = {re.compile('(\d+)(d6|t6)'): dice.D6,
-         re.compile('(\d+)(ba|ge)'): dice.Base,
-         re.compile('(\d+)(sk|fv)'): dice.Skill,
-         re.compile('(\d+)(gr|rd|vp|wp)'): dice.Gear,
-         re.compile('(\d+)(d8|t8)'): dice.D8,
-         re.compile('(\d+)(d10|t10)'): dice.D10,
-         re.compile('(\d+)(d12|t12)'): dice.D12,
-         re.compile('(\d+)res(d6|t6)'): dice.ResourceD6,
-         re.compile('(\d+)res(d8|t8)'): dice.ResourceD8,
-         re.compile('(\d+)res(d10|t10)'): dice.ResourceD10,
-         re.compile('(\d+)res(d12|t12)'): dice.ResourceD12}
+REGEX = {re.compile(' (\d+)(d6|t6)'): dice.D6,
+         re.compile(' (\d+)(ba|ge)'): dice.Base,
+         re.compile(' (\d+)(sk|fv)'): dice.Skill,
+         re.compile(' (\d+)(gr|rd|vp|wp)'): dice.Gear,
+         re.compile(' (\d+)(d8|t8)'): dice.D8,
+         re.compile(' (\d+)(d10|t10)'): dice.D10,
+         re.compile(' (\d+)(d12|t12)'): dice.D12,
+         re.compile(' (\d+)res(d6|t6)'): dice.ResourceD6,
+         re.compile(' (\d+)res(d8|t8)'): dice.ResourceD8,
+         re.compile(' (\d+)res(d10|t10)'): dice.ResourceD10,
+         re.compile(' (\d+)res(d12|t12)'): dice.ResourceD12}
 
 
 @client.event
