@@ -57,7 +57,8 @@ async def roll(context):
             await die.roll()
 
     roll_name = ROLL_NAME_REGEX.search(context.message.content.lower())
-    title = roll_name.group(1) if roll_name is not None else ' '
+    title = roll_name.group(1).capitalize() if roll_name is not None else ' ' \
+                                                                          ''
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
     message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
@@ -67,7 +68,7 @@ async def roll(context):
             await Message.add_reaction(message, '🔄')
 
             try:
-                await client.wait_for('reaction_add', timeout=60.0,
+                await client.wait_for('reaction_add', timeout=600.0,
                                       check=lambda reaction, user: str(reaction.emoji) == '🔄' and user == context.message.author and reaction.message.id == message.id)
             except asyncio.TimeoutError:
                 await Message.clear_reactions(message)
@@ -157,7 +158,7 @@ async def embed_template(context, dicepool, roll_count, title=' '):
         skulls = sum([die.active.skulls for die in dicepool if die.countable])
         embed = discord.Embed(
             title=title,
-            description=f'**\#{roll_count}:** {swords}x<:left_align_swords:546440106500816926> {skulls}x<:left_align_skull:546440106681171970>',
+            description=f'**\#{roll_count}**\n{swords}x<:left_align_swords:546440106500816926>\n{skulls}x<:left_align_skull:546440106681171970>',
             color=context.message.author.color)
     else:
         embed = discord.Embed(title=' ',
