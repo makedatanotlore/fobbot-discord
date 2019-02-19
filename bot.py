@@ -158,7 +158,7 @@ async def embed_template(context, dicepool, roll_count, title=' '):
         skulls = sum([die.active.skulls for die in dicepool if die.countable])
         embed = discord.Embed(
             title=title,
-            description=f'**\#{roll_count}:** {swords}x<:left_align_swords:546440106500816926> {skulls}x<:left_align_skull:546440106681171970>',
+            description=f'**\#{roll_count}:** {swords}x<:grey_sword_left_align:547448099182870539> {skulls}x<:grey_skull_left_align:547448099149447168>',
             color=context.message.author.color,
             timestamp=context.message.edited_at if context.message.edited_at is datetime.datetime else context.message.created_at)
     else:
