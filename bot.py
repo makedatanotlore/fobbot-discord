@@ -61,7 +61,7 @@ async def roll(context):
                                                                           ''
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
-    message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
+    message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 5))), embed=embed)
 
     while pushes > 0:
         if [die for die in dicepool if await die.pushable()]:
@@ -81,7 +81,7 @@ async def roll(context):
             embed = await embed_template(context, dicepool, roll_count, title=title)
 
             await Message.clear_reactions(message)
-            await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
+            await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 5))), embed=embed)
 
             pushes -= 1
         else:
@@ -158,7 +158,7 @@ async def embed_template(context, dicepool, roll_count, title=' '):
         skulls = sum([die.active.skulls for die in dicepool if die.countable])
         embed = discord.Embed(
             title=title,
-            description=f'**\#{roll_count}:** {swords}x<:grey_sword_left_align:547448099182870539> {skulls}x<:grey_skull_left_align:547448099149447168>',
+            description=f'**\#{roll_count}:** {swords} x<:grey_swords:547454438021791745>{skulls} x<:grey_skull:547454438873366528>',
             color=context.message.author.color,
             timestamp=context.message.edited_at if context.message.edited_at is datetime.datetime else context.message.created_at)
     else:
@@ -182,5 +182,12 @@ async def parse_args(context):
     random.shuffle(hand)
 
     return hand
+
+
+# divides list into chunks
+def divide_chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
+
 
 client.run(TOKEN)
