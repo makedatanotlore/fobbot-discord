@@ -5,6 +5,7 @@ import random
 import dice
 import re
 import os
+import datetime
 from discord import Game, Message
 from discord.ext.commands import Bot
 
@@ -14,17 +15,18 @@ BOT_PREFIX = os.environ.get('prefix')
 client = Bot(command_prefix=BOT_PREFIX)
 client.remove_command('help')
 
-REGEX = {re.compile(' (\d+)(d6|t6)'): dice.D6,
-         re.compile(' (\d+)(ba|ge)'): dice.Base,
-         re.compile(' (\d+)(sk|fv)'): dice.Skill,
-         re.compile(' (\d+)(gr|rd|vp|wp)'): dice.Gear,
-         re.compile(' (\d+)(d8|t8)'): dice.D8,
-         re.compile(' (\d+)(d10|t10)'): dice.D10,
-         re.compile(' (\d+)(d12|t12)'): dice.D12,
-         re.compile(' (\d+)res(d6|t6)'): dice.ResourceD6,
-         re.compile(' (\d+)res(d8|t8)'): dice.ResourceD8,
-         re.compile(' (\d+)res(d10|t10)'): dice.ResourceD10,
-         re.compile(' (\d+)res(d12|t12)'): dice.ResourceD12}
+ROLL_NAME_REGEX = re.compile(' \"(.+)\"(?![a-zA-Z\d])')
+REGEX = {re.compile(' (\d+)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
+         re.compile(' (\d+)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
+         re.compile(' (\d+)(sk|fv)(?![a-zA-Z\d])'): dice.Skill,
+         re.compile(' (\d+)(gr|rd|vp|wp)(?![a-zA-Z\d])'): dice.Gear,
+         re.compile(' (\d+)(d8|t8)(?![a-zA-Z\d])'): dice.D8,
+         re.compile(' (\d+)(d10|t10)(?![a-zA-Z\d])'): dice.D10,
+         re.compile(' (\d+)(d12|t12)(?![a-zA-Z\d])'): dice.D12,
+         re.compile(' (\d+)res(d6|t6)(?![a-zA-Z\d])'): dice.ResourceD6,
+         re.compile(' (\d+)res(d8|t8)(?![a-zA-Z\d])'): dice.ResourceD8,
+         re.compile(' (\d+)res(d10|t10)(?![a-zA-Z\d])'): dice.ResourceD10,
+         re.compile(' (\d+)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12}
 
 
 @client.event
@@ -54,8 +56,9 @@ async def roll(context):
     for die in dicepool:
             await die.roll()
 
+    roll_name = ROLL_NAME_REGEX.search(context.message.content.lower())
     roll_count = 1
-    embed = await embed_template(context, dicepool, roll_count)
+    embed = await embed_template(context, dicepool, roll_count, title=roll_name.group(1))
     message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
 
     while pushes > 0:
@@ -73,7 +76,7 @@ async def roll(context):
             for die in dicepool:
                 await die.roll()
 
-            embed = await embed_template(context, dicepool, roll_count)
+            embed = await embed_template(context, dicepool, roll_count, title=roll_name.group(1))
 
             await Message.clear_reactions(message)
             await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
@@ -145,14 +148,16 @@ async def english_help(context):
     await context.message.channel.send(embed=embed)
 
 
-async def embed_template(context, dicepool, roll_count):
+async def embed_template(context, dicepool, roll_count, title=' '):
     countable = [die for die in dicepool if die.countable]
+
+    title = title if title is not None else ' '
 
     if countable:
         swords = sum([die.active.swords for die in dicepool if die.countable])
         skulls = sum([die.active.skulls for die in dicepool if die.countable])
         embed = discord.Embed(
-            title=f' ',
+            title=title,
             description=f'**\#{roll_count}:** {swords}x<:left_align_swords:546440106500816926> {skulls}x<:left_align_skull:546440106681171970>',
             color=context.message.author.color)
     else:
@@ -161,6 +166,7 @@ async def embed_template(context, dicepool, roll_count):
 
     embed.set_author(name=context.message.author.display_name,
                      icon_url=context.message.author.avatar_url)
+    embed.set_footer(text=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     return embed
 
