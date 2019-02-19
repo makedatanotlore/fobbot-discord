@@ -57,8 +57,9 @@ async def roll(context):
             await die.roll()
 
     roll_name = ROLL_NAME_REGEX.search(context.message.content.lower())
+    title = roll_name.group(1) if roll_name is not None else ' '
     roll_count = 1
-    embed = await embed_template(context, dicepool, roll_count, title=roll_name.group(1))
+    embed = await embed_template(context, dicepool, roll_count, title=title)
     message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
 
     while pushes > 0:
@@ -76,7 +77,7 @@ async def roll(context):
             for die in dicepool:
                 await die.roll()
 
-            embed = await embed_template(context, dicepool, roll_count, title=roll_name.group(1))
+            embed = await embed_template(context, dicepool, roll_count, title=title)
 
             await Message.clear_reactions(message)
             await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
@@ -150,8 +151,6 @@ async def english_help(context):
 
 async def embed_template(context, dicepool, roll_count, title=' '):
     countable = [die for die in dicepool if die.countable]
-
-    title = title if title is not None else ' '
 
     if countable:
         swords = sum([die.active.swords for die in dicepool if die.countable])
