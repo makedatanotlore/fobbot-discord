@@ -68,7 +68,7 @@ async def roll(context):
             await Message.add_reaction(message, '🔄')
 
             try:
-                await client.wait_for('reaction_add', timeout=600.0,
+                res = await client.wait_for('reaction_add', timeout=600.0,
                                       check=lambda reaction, user: str(reaction.emoji) == '🔄' and user == context.message.author and reaction.message.id == message.id)
             except asyncio.TimeoutError:
                 await Message.clear_reactions(message)
@@ -159,8 +159,7 @@ async def embed_template(context, dicepool, roll_count, title=' '):
         embed = discord.Embed(
             title=title,
             description=f'**\#{roll_count}:** {swords} x<:grey_swords:547454438021791745>{skulls} x<:grey_skull:547454438873366528>',
-            color=context.message.author.color,
-            timestamp=context.message.edited_at if context.message.edited_at is datetime.datetime else context.message.created_at)
+            color=context.message.author.color)
     else:
         embed = discord.Embed(title=' ',
                               color=context.message.author.color)
