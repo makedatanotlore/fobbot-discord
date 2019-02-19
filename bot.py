@@ -61,7 +61,7 @@ async def roll(context):
                                                                           ''
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
-    message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 5))), embed=embed)
+    message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
     while pushes > 0:
         if [die for die in dicepool if await die.pushable()]:
@@ -81,7 +81,7 @@ async def roll(context):
             embed = await embed_template(context, dicepool, roll_count, title=title)
 
             await Message.clear_reactions(message)
-            await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 5))), embed=embed)
+            await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
             pushes -= 1
         else:
