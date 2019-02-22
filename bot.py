@@ -26,7 +26,8 @@ REGEX = {re.compile(' (\d+)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+)res(d6|t6)(?![a-zA-Z\d])'): dice.ResourceD6,
          re.compile(' (\d+)res(d8|t8)(?![a-zA-Z\d])'): dice.ResourceD8,
          re.compile(' (\d+)res(d10|t10)(?![a-zA-Z\d])'): dice.ResourceD10,
-         re.compile(' (\d+)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12}
+         re.compile(' (\d+)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12,
+         re.compile(' (\d+)(nv|nt|tv)(?![a-zA-Z\d])'): dice.Negative}
 
 
 @client.event
@@ -115,6 +116,9 @@ async def swedish_help(context):
                     f'Resurstärning T10 - `rest10`\n'
                     f'Resurstärning T12 - `rest12`\n',
                     inline=True)
+    embed.add_field(name='Negativa tärningar/tvärtomtärningar',
+                    value=f'Negativ T6 - `nt/tv`\n',
+                    inline=True)
 
     await context.message.channel.send(embed=embed)
 
@@ -146,6 +150,9 @@ async def english_help(context):
                     f'Resource Die D10 - `resd10`\n'
                     f'Resource Die D12 - `resd12`\n',
                     inline=False)
+    embed.add_field(name='Negative dice',
+                    value=f'Negative D6 - `nt/nv`\n',
+                    inline=True)
 
     await context.message.channel.send(embed=embed)
 
