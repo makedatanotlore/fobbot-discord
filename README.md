@@ -7,6 +7,7 @@
 * Push your roll by clicking a reaction "button" (within 60 seconds)
 * Dwarves can push up to 10 times (with "dwarf"/"dvärg" roles)
 * Resource dice!
+* Negative bonus dice! 
 
 ## Add Fobbot to your own server
 https://discordapp.com/api/oauth2/authorize?client_id=545345647390490640&permissions=288832&scope=bot
