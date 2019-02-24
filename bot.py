@@ -5,7 +5,6 @@ import random
 import dice
 import re
 import os
-import datetime
 from discord import Game, Message
 from discord.ext.commands import Bot
 
@@ -58,8 +57,8 @@ async def roll(context):
             await die.roll()
 
     roll_name = ROLL_NAME_REGEX.search(context.message.content.lower())
-    title = roll_name.group(1).capitalize() if roll_name is not None else ' ' \
-                                                                          ''
+    title = roll_name.group(1) if roll_name is not None else ' '
+
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
     message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
@@ -69,7 +68,7 @@ async def roll(context):
             await Message.add_reaction(message, '🔄')
 
             try:
-                res = await client.wait_for('reaction_add', timeout=600.0,
+                await client.wait_for('reaction_add', timeout=600.0,
                                       check=lambda reaction, user: str(reaction.emoji) == '🔄' and user == context.message.author and reaction.message.id == message.id)
             except asyncio.TimeoutError:
                 await Message.clear_reactions(message)
