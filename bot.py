@@ -42,7 +42,7 @@ async def roll(context):
         return
 
     author_roles = [role.name.lower() for role in context.message.author.roles]
-    pushes = 10 if 'dvärg' in author_roles or 'dwarf' in author_roles else 1
+    pushes = 11 if 'dvärg' in author_roles or 'dwarf' in author_roles else 1
 
     dicepool = await parse_args(context)
 
