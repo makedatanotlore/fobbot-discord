@@ -31,6 +31,12 @@ REGEX = {re.compile(' (\d+)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
 
 @client.event
 async def on_ready():
+    print('='*36)
+    print(f'CONNECTED TO {len(client.guilds)} SERVERS WITH {len(client.users)} USERS')
+    print('SERVERS:')
+    for guild in client.guilds:
+        print(f'{str.upper(guild.name)} WITH {len(guild.members)} MEMBERS')
+    print('=' * 36)
     await client.change_presence(activity=Game(name=f'FBL on {len(client.guilds)} servers'))
 
 
