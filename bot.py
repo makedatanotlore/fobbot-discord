@@ -62,7 +62,7 @@ async def roll(context):
     for die in dicepool:
             await die.roll()
 
-    roll_name = ROLL_NAME_REGEX.search(context.message.content.lower())
+    roll_name = ROLL_NAME_REGEX.search(context.message.content)
     title = roll_name.group(1) if roll_name is not None else ' '
 
     roll_count = 1
