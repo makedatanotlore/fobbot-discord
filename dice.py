@@ -114,46 +114,46 @@ class D12(Die):
 class ResourceD6(Die):
     faces = [Face('resource_d6_one', '<:skill_one:546398615409655830>', 1, 0, 1),
              Face('resource_d6_two', '<:skill_one:546398615409655830>', 2, 0, 1),
-             Face('resource_d6_three', '<:skill_blank:545643939139682314>', 3, 0, 1),
-             Face('resource_d6_four', '<:skill_blank:545643939139682314>', 4, 0, 1),
-             Face('resource_d6_five', '<:skill_blank:545643939139682314>', 5, 0, 1),
-             Face('resource_d6_six', '<:skill_blank:545643939139682314>', 6, 0, 1)]
+             Face('resource_d6_three', '<:skill_six:545643939387146268>', 3, 0, 1),
+             Face('resource_d6_four', '<:skill_six:545643939387146268>', 4, 0, 1),
+             Face('resource_d6_five', '<:skill_six:545643939387146268>', 5, 0, 1),
+             Face('resource_d6_six', '<:skill_six:545643939387146268>', 6, 0, 1)]
 
 
 class ResourceD8(Die):
     faces = [Face('resource_d8_one', '<:d8_one:546398614847619082>', 1, 0, 1),
              Face('resource_d8_two', '<:d8_one:546398614847619082>', 2, 0, 1),
-             Face('resource_d8_three', '<:d8_blank:545646540782436365>', 3, 0, 1),
-             Face('resource_d8_four', '<:d8_blank:545646540782436365>', 4, 0, 1),
-             Face('resource_8_five', '<:d8_blank:545646540782436365>', 5, 0, 1),
-             Face('resource_d8_six', '<:d8_blank:545646540782436365>', 6, 0, 1),
-             Face('resource_d8_seven', '<:d8_blank:545646540782436365>', 7, 0, 1),
-             Face('resource_d8_eight', '<:d8_blank:545646540782436365>', 8, 0, 1)]
+             Face('resource_d8_three', '<:d8_six:545646541252329482>', 3, 0, 1),
+             Face('resource_d8_four', '<:d8_six:545646541252329482>', 4, 0, 1),
+             Face('resource_8_five', '<:d8_six:545646541252329482>', 5, 0, 1),
+             Face('resource_d8_six', '<:d8_six:545646541252329482>', 6, 0, 1),
+             Face('resource_d8_seven', '<:d8_six:545646541252329482>', 7, 0, 1),
+             Face('resource_d8_eight', '<:d8_six:545646541252329482>', 8, 0, 1)]
 
 
 class ResourceD10(Die):
     faces = [Face('resource_d10_one', '<:d10_one:546398614705012757>', 1, 0, 1),
              Face('resource_d10_two', '<:d10_one:546398614705012757>', 2, 0, 1),
-             Face('resource_d10_three', '<:d10_blank:545646579831275541>', 3, 0, 1),
-             Face('resource_d10_four', '<:d10_blank:545646579831275541>', 4, 0, 1),
-             Face('resource_d10_five', '<:d10_blank:545646579831275541>', 5, 0, 1),
-             Face('resource_d10_six', '<:d10_blank:545646579831275541>', 6, 0, 1),
-             Face('resource_d10_seven', '<:d10_blank:545646579831275541>', 7, 0, 1),
-             Face('resource_d10_eight', '<:d10_blank:545646579831275541>', 8, 0, 1),
-             Face('resource_d10_nine', '<:d10_blank:545646579831275541>', 9, 0, 1),
-             Face('resource_d10_ten', '<:d10_blank:545646579831275541>', 10, 0, 1)]
+             Face('resource_d10_three', '<:d10_six:545646579412107265>', 3, 0, 1),
+             Face('resource_d10_four', '<:d10_six:545646579412107265>', 4, 0, 1),
+             Face('resource_d10_five', '<:d10_six:545646579412107265>', 5, 0, 1),
+             Face('resource_d10_six', '<:d10_six:545646579412107265>', 6, 0, 1),
+             Face('resource_d10_seven', '<:d10_six:545646579412107265>', 7, 0, 1),
+             Face('resource_d10_eight', '<:d10_six:545646579412107265>', 8, 0, 1),
+             Face('resource_d10_nine', '<:d10_six:545646579412107265>', 9, 0, 1),
+             Face('resource_d10_ten', '<:d10_six:545646579412107265>', 10, 0, 1)]
 
 
 class ResourceD12(Die):
     faces = [Face('resource_d12_one', '<:d12_one:546398614667133006>', 1, 0, 1),
              Face('resource_d12_two', '<:d12_one:546398614667133006>', 2, 0, 1),
-             Face('resource_d12_three', '<:d12_blank:545646598093537282>', 3, 0, 1),
-             Face('resource_d12_four', '<:d12_blank:545646598093537282>', 4, 0, 1),
-             Face('resource_d12_five', '<:d12_blank:545646598093537282>', 5, 0, 1),
-             Face('resource_d12_six', '<:d12_blank:545646598093537282>', 6, 0, 1),
-             Face('resource_d12_seven', '<:d12_blank:545646598093537282>', 7, 0, 1),
-             Face('resource_d12_eight', '<:d12_blank:545646598093537282>', 8, 0, 1),
-             Face('resource_d12_nine', '<:d12_blank:545646598093537282>', 9, 0, 1),
-             Face('resource_d12_ten', '<:d12_blank:545646598093537282>', 10, 0, 1),
-             Face('resource_d12_eleven', '<:d12_blank:545646598093537282>', 11, 0, 1),
-             Face('resource_d12_twelve', '<:d12_blank:545646598093537282>', 12, 0, 1)]
+             Face('resource_d12_three', '<:d12_six:545646598517161984>', 3, 0, 1),
+             Face('resource_d12_four', '<:d12_six:545646598517161984>', 4, 0, 1),
+             Face('resource_d12_five', '<:d12_six:545646598517161984>', 5, 0, 1),
+             Face('resource_d12_six', '<:d12_six:545646598517161984>', 6, 0, 1),
+             Face('resource_d12_seven', '<:d12_six:545646598517161984>', 7, 0, 1),
+             Face('resource_d12_eight', '<:d12_six:545646598517161984>', 8, 0, 1),
+             Face('resource_d12_nine', '<:d12_six:545646598517161984>', 9, 0, 1),
+             Face('resource_d12_ten', '<:d12_six:545646598517161984>', 10, 0, 1),
+             Face('resource_d12_eleven', '<:d12_six:545646598517161984>', 11, 0, 1),
+             Face('resource_d12_twelve', '<:d12_six:545646598517161984>', 12, 0, 1)]

@@ -16,6 +16,7 @@ client = Bot(command_prefix=BOT_PREFIX)
 client.remove_command('help')
 
 GRITTERS = ['dvärg', 'dwarf', 'dvergar']
+ACTUAL_NUMBERS_REGEX = re.compile(' -an(?![a-zA-Z\d])')
 ROLL_NAME_REGEX = re.compile(' \"(.+)\"(?![a-zA-Z\d])')
 REGEX = {re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+|)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
@@ -175,7 +176,8 @@ async def english_help(context):
                     inline=False)
     embed.add_field(name='Numbered Dice',
                     value='When you need an actual number on the die.\n'
-                    f'Regular D6 - `d6`\n',
+                    f'Regular D6 - `d6`\n'
+                    f'*Using `-an` to get **ALL** the numbers is the 9bee\'s knees.*',
                     inline=False)
     embed.add_field(name='Notes',
                     value='When you need to add a note to your roll, use "".\n'
@@ -199,6 +201,10 @@ async def embed_template(context, dicepool, roll_count, title=' '):
     else:
         embed = discord.Embed(title=title,
                               color=context.message.author.color)
+
+    if ACTUAL_NUMBERS_REGEX.search(context.message.content):
+        embed.add_field(name='Actual Numbers',
+                        value=f'{[die.active.pips for die in dicepool]}')
 
     embed.set_author(name=context.message.author.display_name,
                      icon_url=context.message.author.avatar_url)
