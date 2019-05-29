@@ -9,24 +9,26 @@ from discord import Game, Message
 from discord.ext.commands import Bot
 
 TOKEN = os.environ.get('token')
+TEST_TOKEN = os.environ.get('test_token')
 BOT_PREFIX = os.environ.get('prefix')
 
 client = Bot(command_prefix=BOT_PREFIX)
 client.remove_command('help')
 
+GRITTERS = ['dvärg', 'dwarf', 'dvergar']
 ROLL_NAME_REGEX = re.compile(' \"(.+)\"(?![a-zA-Z\d])')
-REGEX = {re.compile(' (\d+)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
-         re.compile(' (\d+)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
-         re.compile(' (\d+)(sk|fv)(?![a-zA-Z\d])'): dice.Skill,
-         re.compile(' (\d+)(gr|rd|vp|wp)(?![a-zA-Z\d])'): dice.Gear,
-         re.compile(' (\d+)(d8|t8)(?![a-zA-Z\d])'): dice.D8,
-         re.compile(' (\d+)(d10|t10)(?![a-zA-Z\d])'): dice.D10,
-         re.compile(' (\d+)(d12|t12)(?![a-zA-Z\d])'): dice.D12,
-         re.compile(' (\d+)res(d6|t6)(?![a-zA-Z\d])'): dice.ResourceD6,
-         re.compile(' (\d+)res(d8|t8)(?![a-zA-Z\d])'): dice.ResourceD8,
-         re.compile(' (\d+)res(d10|t10)(?![a-zA-Z\d])'): dice.ResourceD10,
-         re.compile(' (\d+)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12,
-         re.compile(' (\d+)(nv|nt|tv)(?![a-zA-Z\d])'): dice.Negative}
+REGEX = {re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
+         re.compile(' (\d+|)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
+         re.compile(' (\d+|)(sk|fv)(?![a-zA-Z\d])'): dice.Skill,
+         re.compile(' (\d+|)(gr|rd|vp|wp)(?![a-zA-Z\d])'): dice.Gear,
+         re.compile(' (\d+|)(d8|t8)(?![a-zA-Z\d])'): dice.D8,
+         re.compile(' (\d+|)(d10|t10)(?![a-zA-Z\d])'): dice.D10,
+         re.compile(' (\d+|)(d12|t12)(?![a-zA-Z\d])'): dice.D12,
+         re.compile(' (\d+|)res(d6|t6)(?![a-zA-Z\d])'): dice.ResourceD6,
+         re.compile(' (\d+|)res(d8|t8)(?![a-zA-Z\d])'): dice.ResourceD8,
+         re.compile(' (\d+|)res(d10|t10)(?![a-zA-Z\d])'): dice.ResourceD10,
+         re.compile(' (\d+|)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12,
+         re.compile(' (\d+|)(nv|nt|tv)(?![a-zA-Z\d])'): dice.Negative}
 
 
 @client.event
@@ -37,7 +39,7 @@ async def on_ready():
     for guild in client.guilds:
         print(f'{str.upper(guild.name)} WITH {len(guild.members)} MEMBERS')
     print('=' * 36)
-    await client.change_presence(activity=Game(name=f'FBL on {len(client.guilds)} servers'))
+    await client.change_presence(activity=Game(name=f'>help on {len(client.guilds)} servers'))
 
 
 @client.command(name='slå',
@@ -48,7 +50,8 @@ async def roll(context):
         return
 
     author_roles = [role.name.lower() for role in context.message.author.roles]
-    pushes = 11 if 'dvärg' in author_roles or 'dwarf' in author_roles else 1
+    grit = [role for role in author_roles if role in GRITTERS]
+    pushes = 11 if grit else 1
 
     dicepool = await parse_args(context)
 
@@ -104,26 +107,36 @@ async def swedish_help(context):
                           color=0xa2e600,
                           description='För att slå tärning, ange antalet tärningar följt av tärningstypen. Tryck på 🔄 för att pressa slaget.')
     embed.add_field(name='Exempel',
-                    value='`>slå 5ge 2fv 2rd 1t8`',
+                    value='`>slå 5ge 2fv 2rd t8`',
                     inline=False)
     embed.add_field(name='Tärningstyper',
-                    value=f'Vanlig T6 - `t6`\n'
-                    f'Grundegenskapstärning - `ge`\n'
+                    value=f'Grundegenskapstärning - `ge`\n'
                     f'Färdighetstärning - `fv`\n'
                     f'Redskaps/vapentärning - `rd/vp`\n'
                     f'Artefakttärning T8 - `t8`\n'
                     f'Artefakttärning T10 - `t10`\n'
                     f'Artefakttärning T12 - `t12`',
                     inline=False)
-    embed.add_field(name='Resurstärningar (<:ss_bane:546280456828485632> - 1/2)',
-                    value=f'Resurstärning T6 - `rest6`\n'
+    embed.add_field(name='Resurstärningar',
+                    value='När du behöver slå för en resurs.<:grey_skull:547454438873366528> betyder att resursen förbrukats.\n'
+                    f'Resurstärning T6 - `rest6`\n'
                     f'Resurstärning T8 - `rest8`\n'
                     f'Resurstärning T10 - `rest10`\n'
                     f'Resurstärning T12 - `rest12`\n',
-                    inline=True)
+                    inline=False)
     embed.add_field(name='Negativa tärningar/tvärtomtärningar',
-                    value=f'Negativ T6 - `nt/tv`\n',
-                    inline=True)
+                    value='När du har en negativ modifikation på slaget.\n'
+                    f'Negativ T6 - `nt/tv`\n',
+                    inline=False)
+    embed.add_field(name='Numrerade tärningar',
+                    value='När du behöver en siffra på tärningen.\n'
+                    f'Vanlig T6 - `t6`\n',
+                    inline=False)
+    embed.add_field(name='Anteckningar',
+                    value='När du behöver en anteckning på slaget, använd "".\n'
+                    f'`>slå 2rest8 "Mat/Vatten"`\n',
+                    inline=False)
+    embed.set_footer(text='For English, type >help')
 
     await context.message.channel.send(embed=embed)
 
@@ -137,27 +150,38 @@ async def english_help(context):
     embed = discord.Embed(title='Help - Rolling the dice',
                           color=0xa2e600,
                           description='To roll dice, enter the number of dice followed by the type. Click 🔄 to push.')
-    embed.add_field(name='Example usage',
-                    value='`>roll 5ba 2sk 2gr 1d8`',
+    embed.add_field(name='Example Usage',
+                    value='`>roll 5ba 2sk 2gr d8`\n'
+                          '*Remember to smash that space button.*',
                     inline=False)
     embed.add_field(name='Dice',
-                    value=f'Regular D6 - `d6`\n'
-                    f'Base Attribute Die - `ba`\n'
+                    value=f'Base Attribute Die - `ba`\n'
                     f'Skill Die - `sk`\n'
                     f'Gear/Weapon Die - `gr/wp`\n'
                     f'Artifact Die D8 - `d8`\n'
                     f'Artifact Die D10 - `d10`\n'
                     f'Artifact Die D12 - `d12`',
                     inline=False)
-    embed.add_field(name='Resource Dice (<:ss_bane:546280456828485632> - 1/2)',
-                    value=f'Resource Die D6 - `resd6`\n'
+    embed.add_field(name='Resource Dice',
+                    value='When you\'re using a resource. A<:grey_skull:547454438873366528>means the resource is consumed.\n'
+                    f'Resource Die D6 - `resd6`\n'
                     f'Resource Die D8 - `resd8`\n'
                     f'Resource Die D10 - `resd10`\n'
                     f'Resource Die D12 - `resd12`\n',
                     inline=False)
-    embed.add_field(name='Negative dice',
-                    value=f'Negative D6 - `nt/nv`\n',
-                    inline=True)
+    embed.add_field(name='Negative Dice',
+                    value='When you have a negative bonus modifier.\n'
+                    f'Negative D6 - `nt/nv`\n',
+                    inline=False)
+    embed.add_field(name='Numbered Dice',
+                    value='When you need an actual number on the die.\n'
+                    f'Regular D6 - `d6`\n',
+                    inline=False)
+    embed.add_field(name='Notes',
+                    value='When you need to add a note to your roll, use "".\n'
+                    f'`>roll 2resd8 "Food/Water"`\n',
+                    inline=False)
+    embed.set_footer(text='För svenska, skriv >hjälp')
 
     await context.message.channel.send(embed=embed)
 
@@ -170,10 +194,10 @@ async def embed_template(context, dicepool, roll_count, title=' '):
         skulls = sum([die.active.skulls for die in dicepool if die.countable])
         embed = discord.Embed(
             title=title,
-            description=f'**\#{roll_count}:** {swords} x<:grey_swords:547454438021791745>{skulls} x<:grey_skull:547454438873366528>',
+            description=f'**\#{roll_count}:** {swords}<:grey_swords:547454438021791745>{skulls}<:grey_skull:547454438873366528>',
             color=context.message.author.color)
     else:
-        embed = discord.Embed(title=' ',
+        embed = discord.Embed(title=title,
                               color=context.message.author.color)
 
     embed.set_author(name=context.message.author.display_name,
@@ -188,7 +212,8 @@ async def parse_args(context):
     for regex, die in REGEX.items():
         result = regex.search(context.message.content.lower())
         if result is not None:
-            hand += [die() for i in range(int(result.group(1)))]
+            amount = int(result.group(1)) if result.group(1) is not '' else 1
+            hand += [die() for i in range(amount)]
 
     random.shuffle(hand)
 
