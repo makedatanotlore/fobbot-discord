@@ -51,12 +51,12 @@ class Skill(Die):
 
 class Negative(Die):
     countable = True
-    faces = [Face('negative_one', '<:skill_blank:545643939139682314>', 1, 0, 0),
-             Face('negative_two', '<:skill_blank:545643939139682314>', 2, 0, 0),
-             Face('negative_three', '<:skill_blank:545643939139682314>', 3, 0, 0),
-             Face('negative_four', '<:skill_blank:545643939139682314>', 4, 0, 0),
-             Face('negative_five', '<:skill_blank:545643939139682314>', 5, 0, 0),
-             Face('negative_six', '<:negative_six:548433188448501776>', 6, -1, 0)]
+    faces = [Face('negative_one', '<:negative_blank:583768736578797578>', 1, 0, 0),
+             Face('negative_two', '<:negative_blank:583768736578797578>', 2, 0, 0),
+             Face('negative_three', '<:negative_blank:583768736578797578>', 3, 0, 0),
+             Face('negative_four', '<:negative_blank:583768736578797578>', 4, 0, 0),
+             Face('negative_five', '<:negative_blank:583768736578797578>', 5, 0, 0),
+             Face('negative_six', '<:negative_six:583768602440630292>', 6, -1, 0)]
 
 
 class Gear(Die):
