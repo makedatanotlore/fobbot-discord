@@ -112,48 +112,48 @@ class D12(Die):
 
 
 class ResourceD6(Die):
-    faces = [Face('resource_d6_one', '<:skill_one:546398615409655830>', 1, 0, 1),
-             Face('resource_d6_two', '<:skill_one:546398615409655830>', 2, 0, 1),
-             Face('resource_d6_three', '<:skill_six:545643939387146268>', 3, 0, 1),
-             Face('resource_d6_four', '<:skill_six:545643939387146268>', 4, 0, 1),
-             Face('resource_d6_five', '<:skill_six:545643939387146268>', 5, 0, 1),
-             Face('resource_d6_six', '<:skill_six:545643939387146268>', 6, 0, 1)]
+    faces = [Face('resource_d6_one', '<:resd6_down:583957078541074469>', 1, 0, 1),
+             Face('resource_d6_two', '<:resd6_down:583957078541074469>', 2, 0, 1),
+             Face('resource_d6_three', '<:resd6_blank:583957971319652352>', 3, 0, 1),
+             Face('resource_d6_four', '<:resd6_blank:583957971319652352>', 4, 0, 1),
+             Face('resource_d6_five', '<:resd6_blank:583957971319652352>', 5, 0, 1),
+             Face('resource_d6_six', '<:resd6_blank:583957971319652352>', 6, 0, 1)]
 
 
 class ResourceD8(Die):
-    faces = [Face('resource_d8_one', '<:d8_one:546398614847619082>', 1, 0, 1),
-             Face('resource_d8_two', '<:d8_one:546398614847619082>', 2, 0, 1),
-             Face('resource_d8_three', '<:d8_six:545646541252329482>', 3, 0, 1),
-             Face('resource_d8_four', '<:d8_six:545646541252329482>', 4, 0, 1),
-             Face('resource_8_five', '<:d8_six:545646541252329482>', 5, 0, 1),
-             Face('resource_d8_six', '<:d8_six:545646541252329482>', 6, 0, 1),
-             Face('resource_d8_seven', '<:d8_six:545646541252329482>', 7, 0, 1),
-             Face('resource_d8_eight', '<:d8_six:545646541252329482>', 8, 0, 1)]
+    faces = [Face('resource_d8_one', '<:resd8_down:583957078180233216>', 1, 0, 1),
+             Face('resource_d8_two', '<:resd8_down:583957078180233216>', 2, 0, 1),
+             Face('resource_d8_three', '<:resd8_blank:583957971441156126>', 3, 0, 1),
+             Face('resource_d8_four', '<:resd8_blank:583957971441156126>', 4, 0, 1),
+             Face('resource_8_five', '<:resd8_blank:583957971441156126>', 5, 0, 1),
+             Face('resource_d8_six', '<:resd8_blank:583957971441156126>', 6, 0, 1),
+             Face('resource_d8_seven', '<:resd8_blank:583957971441156126>', 7, 0, 1),
+             Face('resource_d8_eight', '<:resd8_blank:583957971441156126>', 8, 0, 1)]
 
 
 class ResourceD10(Die):
-    faces = [Face('resource_d10_one', '<:d10_one:546398614705012757>', 1, 0, 1),
-             Face('resource_d10_two', '<:d10_one:546398614705012757>', 2, 0, 1),
-             Face('resource_d10_three', '<:d10_six:545646579412107265>', 3, 0, 1),
-             Face('resource_d10_four', '<:d10_six:545646579412107265>', 4, 0, 1),
-             Face('resource_d10_five', '<:d10_six:545646579412107265>', 5, 0, 1),
-             Face('resource_d10_six', '<:d10_six:545646579412107265>', 6, 0, 1),
-             Face('resource_d10_seven', '<:d10_six:545646579412107265>', 7, 0, 1),
-             Face('resource_d10_eight', '<:d10_six:545646579412107265>', 8, 0, 1),
-             Face('resource_d10_nine', '<:d10_six:545646579412107265>', 9, 0, 1),
-             Face('resource_d10_ten', '<:d10_six:545646579412107265>', 10, 0, 1)]
+    faces = [Face('resource_d10_one', '<:resd10_down:583957078238822439>', 1, 0, 1),
+             Face('resource_d10_two', '<:resd10_down:583957078238822439>', 2, 0, 1),
+             Face('resource_d10_three', '<:resd10_blank:583957971340361768>', 3, 0, 1),
+             Face('resource_d10_four', '<:resd10_blank:583957971340361768>', 4, 0, 1),
+             Face('resource_d10_five', '<:resd10_blank:583957971340361768>', 5, 0, 1),
+             Face('resource_d10_six', '<:resd10_blank:583957971340361768>', 6, 0, 1),
+             Face('resource_d10_seven', '<:resd10_blank:583957971340361768>', 7, 0, 1),
+             Face('resource_d10_eight', '<:resd10_blank:583957971340361768>', 8, 0, 1),
+             Face('resource_d10_nine', '<:resd10_blank:583957971340361768>', 9, 0, 1),
+             Face('resource_d10_ten', '<:resd10_blank:583957971340361768>', 10, 0, 1)]
 
 
 class ResourceD12(Die):
-    faces = [Face('resource_d12_one', '<:d12_one:546398614667133006>', 1, 0, 1),
-             Face('resource_d12_two', '<:d12_one:546398614667133006>', 2, 0, 1),
-             Face('resource_d12_three', '<:d12_six:545646598517161984>', 3, 0, 1),
-             Face('resource_d12_four', '<:d12_six:545646598517161984>', 4, 0, 1),
-             Face('resource_d12_five', '<:d12_six:545646598517161984>', 5, 0, 1),
-             Face('resource_d12_six', '<:d12_six:545646598517161984>', 6, 0, 1),
-             Face('resource_d12_seven', '<:d12_six:545646598517161984>', 7, 0, 1),
-             Face('resource_d12_eight', '<:d12_six:545646598517161984>', 8, 0, 1),
-             Face('resource_d12_nine', '<:d12_six:545646598517161984>', 9, 0, 1),
-             Face('resource_d12_ten', '<:d12_six:545646598517161984>', 10, 0, 1),
-             Face('resource_d12_eleven', '<:d12_six:545646598517161984>', 11, 0, 1),
-             Face('resource_d12_twelve', '<:d12_six:545646598517161984>', 12, 0, 1)]
+    faces = [Face('resource_d12_one', '<:resd12_down:583957078436085790>', 1, 0, 1),
+             Face('resource_d12_two', '<:resd12_down:583957078436085790>', 2, 0, 1),
+             Face('resource_d12_three', '<:resd12_blank:583957971495682051>', 3, 0, 1),
+             Face('resource_d12_four', '<:resd12_blank:583957971495682051>', 4, 0, 1),
+             Face('resource_d12_five', '<:resd12_blank:583957971495682051>', 5, 0, 1),
+             Face('resource_d12_six', '<:resd12_blank:583957971495682051>', 6, 0, 1),
+             Face('resource_d12_seven', '<:resd12_blank:583957971495682051>', 7, 0, 1),
+             Face('resource_d12_eight', '<:resd12_blank:583957971495682051>', 8, 0, 1),
+             Face('resource_d12_nine', '<:resd12_blank:583957971495682051>', 9, 0, 1),
+             Face('resource_d12_ten', '<:resd12_blank:583957971495682051>', 10, 0, 1),
+             Face('resource_d12_eleven', '<:resd12_blank:583957971495682051>', 11, 0, 1),
+             Face('resource_d12_twelve', '<:resd12_blank:583957971495682051>', 12, 0, 1)]
