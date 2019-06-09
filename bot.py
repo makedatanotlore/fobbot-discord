@@ -152,6 +152,9 @@ async def swedish_help(context):
                     value='När du behöver en anteckning på slaget, använd "".\n'
                     f'`>slå 2rest8 "Mat/Vatten"`\n',
                     inline=False)
+    embed.add_field(name='Kontakt',
+                    value='Hoppa in på https://discord.gg/68hbPeZ för att ta kontakt.',
+                    inline=False)
     embed.set_footer(text='For English, type >help')
 
     await context.message.channel.send(embed=embed)
@@ -197,6 +200,9 @@ async def english_help(context):
     embed.add_field(name='Notes',
                     value='When you need to add a note to your roll, use "".\n'
                     f'`>roll 2resd8 "Food/Water"`\n',
+                    inline=False)
+    embed.add_field(name='Contact',
+                    value='Visit https://discord.gg/68hbPeZ to get in touch.',
                     inline=False)
     embed.set_footer(text='För svenska, skriv >hjälp')
 
