@@ -61,7 +61,7 @@ class Negative(Die):
 
 class Gear(Die):
     countable = True
-    faces = [Face('gear_one', '<:gear_one:545646496691912704>', 1, 0, 1),
+    faces = [Face('gear_one', '<:gear_one:587358809476038676>', 1, 0, 1),
              Face('gear_two', '<:gear_blank:545646496586924035>', 2, 0, 0),
              Face('gear_three', '<:gear_blank:545646496586924035>', 3, 0, 0),
              Face('gear_four', '<:gear_blank:545646496586924035>', 4, 0, 0),

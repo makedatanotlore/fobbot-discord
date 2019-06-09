@@ -5,6 +5,7 @@ import random
 import dice
 import re
 import os
+from collections import namedtuple
 from discord import Game, Message
 from discord.ext.commands import Bot
 
@@ -31,6 +32,10 @@ REGEX = {re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+|)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12,
          re.compile(' (\d+|)(nv|nt|tv)(?![a-zA-Z\d])'): dice.Negative}
 
+Roll = namedtuple('Roll', 'guild user dicepool')
+
+roll_log = []
+
 
 @client.event
 async def on_ready():
@@ -41,6 +46,14 @@ async def on_ready():
         print(f'{str.upper(guild.name)} WITH {len(guild.members)} MEMBERS')
     print('=' * 36)
     await client.change_presence(activity=Game(name=f'>help on {len(client.guilds)} servers'))
+
+
+@client.event
+async def on_disconnect():
+    print('='*36)
+    print(f'SESSION DISCONNECTED - AFTER {len(roll_log)} ROLLS')
+    for roll in roll_log:
+        print(f'{roll.guild} - {roll.user} - {[die.current.name for die in roll.dicepool]}')
 
 
 @client.command(name='slå',
@@ -65,6 +78,7 @@ async def roll(context):
 
     for die in dicepool:
             await die.roll()
+    roll_log.append(Roll(context.message.guild.name, context.message.author.display_name, dicepool))
 
     roll_name = ROLL_NAME_REGEX.search(context.message.content)
     title = roll_name.group(1) if roll_name is not None else ' '
@@ -87,6 +101,7 @@ async def roll(context):
             roll_count += 1
             for die in dicepool:
                 await die.roll()
+            roll_log.append(Roll(context.message.guild.name, context.message.author.display_name, dicepool))
 
             embed = await embed_template(context, dicepool, roll_count, title=title)
 
