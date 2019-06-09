@@ -9,11 +9,10 @@
 * Resource dice
 * Negative bonus dice
 
-## Add Fobbot to your own server
-https://discordapp.com/api/oauth2/authorize?client_id=545345647390490640&permissions=288832&scope=bot
+### [Add Fobbot to your own server](https://discordapp.com/api/oauth2/authorize?client_id=545345647390490640&permissions=288832&scope=bot)
 
 ## Contact
-Connect to the makedatanotlore Discord server if you need to get in touch: https://discord.gg/68hbPeZ
+Connect to the [makedatanotlore Discord server](https://discord.gg/68hbPeZ) if you need to get in touch. 
 
 ## How to Roll
 To roll dice, enter the number of dice followed by the type. Click 🔄 to push. Use `>help` to 
