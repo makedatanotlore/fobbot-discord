@@ -5,12 +5,18 @@
 * English and Swedish support
 * Regular D6s for when you need to roll a D66 or similar (or add -an to your command for actual numbers rolled)
 * Push your roll by clicking a reaction "button" (within 10 minutes)
-* Dwarves can push up to 10 times (with "dwarf"/"dvärg" roles)
+* Dwarves can push up to 10 times (the player rolling needs a Discord role called `dwarf` or `dvärg`)
 * Resource dice
 * Negative bonus dice
 
+## Add Fobbot to your own server
+https://discordapp.com/api/oauth2/authorize?client_id=545345647390490640&permissions=288832&scope=bot
+
+## Contact
+Hit me up on Discord if you've any questions - Visetharm#8462, or create an issue on this repo.
+
 ## How to Roll
-To roll dice, enter the number of dice followed by the type. Click 🔄 to push.
+To roll dice, enter the number of dice followed by the type. Click 🔄 to push. Use `>help` to 
 
 ### Example Usage
 `>roll 5ba 2sk 2gr d8`
@@ -46,9 +52,3 @@ For when you need an actual number on the die. You can also add `-an` to any com
 ### Notes
 When you need to add a note or comment to your roll, use "".
 `>roll 2resd8 "Food/Water"`
-
-## Add Fobbot to your own server
-https://discordapp.com/api/oauth2/authorize?client_id=545345647390490640&permissions=288832&scope=bot
-
-## Contact
-Hit me up on Discord if you've any questions - Visetharm#8462, or create an issue on this repo.
