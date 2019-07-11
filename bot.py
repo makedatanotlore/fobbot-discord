@@ -222,6 +222,7 @@ async def embed_template(context, dicepool, roll_count, title=' '):
             color=context.message.author.color)
     else:
         embed = discord.Embed(title=title,
+                              description=f'**{roll_count})**',
                               color=context.message.author.color)
 
     if ACTUAL_NUMBERS_REGEX.search(context.message.content):
