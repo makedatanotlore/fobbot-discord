@@ -29,6 +29,15 @@ class D6(Die):
              Face('d6_six', '<:d6_six:583200701891477504>', 6, 0, 1)]
 
 
+class TalesFromTheLoopD6(Die):
+    faces = [Face('tftl_d6_one', '<:tftl_blank:598773871864315914>', 1, 0, 0),
+             Face('tftl_d6_two', '<:tftl_blank:598773871864315914>', 2, 0, 0),
+             Face('tftl_d6_three', '<:tftl_blank:598773871864315914>', 3, 0, 0),
+             Face('tftl_d6_four', '<:tftl_blank:598773871864315914>', 4, 0, 0),
+             Face('tftl_d6_five', '<:tftl_blank:598773871864315914>', 5, 0, 0),
+             Face('tftl_d6_six', '<:tftl_six:598773871830892554>', 6, 1, 0)]
+
+
 class Base(Die):
     countable = True
     faces = [Face('base_one', '<:base_one:545643569218584638>', 1, 0, 1),
@@ -157,3 +166,5 @@ class ResourceD12(Die):
              Face('resource_d12_ten', '<:resd12_blank:583957971495682051>', 10, 0, 1),
              Face('resource_d12_eleven', '<:resd12_blank:583957971495682051>', 11, 0, 1),
              Face('resource_d12_twelve', '<:resd12_blank:583957971495682051>', 12, 0, 1)]
+
+

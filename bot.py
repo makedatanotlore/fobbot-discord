@@ -30,7 +30,8 @@ REGEX = {re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+|)res(d8|t8)(?![a-zA-Z\d])'): dice.ResourceD8,
          re.compile(' (\d+|)res(d10|t10)(?![a-zA-Z\d])'): dice.ResourceD10,
          re.compile(' (\d+|)res(d12|t12)(?![a-zA-Z\d])'): dice.ResourceD12,
-         re.compile(' (\d+|)(nv|nt|tv)(?![a-zA-Z\d])'): dice.Negative}
+         re.compile(' (\d+|)(nv|nt|tv)(?![a-zA-Z\d])'): dice.Negative,
+         re.compile(' (\d+|)(tl|vk)(?![a-zA-Z\d])'): dice.TalesFromTheLoopD6}
 
 Roll = namedtuple('Roll', 'guild user dicepool')
 
