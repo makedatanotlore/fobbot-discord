@@ -35,7 +35,7 @@ class TalesFromTheLoopD6(Die):
              Face('tftl_d6_three', '<:tftl_blank:598773871864315914>', 3, 0, 0),
              Face('tftl_d6_four', '<:tftl_blank:598773871864315914>', 4, 0, 0),
              Face('tftl_d6_five', '<:tftl_blank:598773871864315914>', 5, 0, 0),
-             Face('tftl_d6_six', '<:tftl_six:598773871830892554>', 6, 1, 0)]
+             Face('tftl_d6_six', '<:tftl_six:598775930906869761>', 6, 1, 0)]
 
 
 class Base(Die):
