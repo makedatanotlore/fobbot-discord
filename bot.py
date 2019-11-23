@@ -211,22 +211,22 @@ async def english_help(context):
 
 
 async def embed_template(context, dicepool, roll_count, title=' '):
-    countable = [die for die in dicepool if die.countable]
 
-    if countable:
-        swords = sum([die.active.swords for die in dicepool if die.countable])
-        skulls = sum([die.active.skulls for die in dicepool if die.countable])
-        embed = discord.Embed(
-            title=title,
-            description=f'**{roll_count})** <:grey_swords:547454438021791745> = {swords}         <:grey_skull:547454438873366528> = {skulls}',
-            color=context.message.author.color)
-    elif [die for die in dicepool if die.success_icon]:
-        icon = [die for die in dicepool if die.success_icon][0].success_icon
-        successes = sum([die.active.swords for die in dicepool if die.countable])
-        embed = discord.Embed(
-            title=title,
-            description=f'**{roll_count})** {icon} = {successes}',
-            color=context.message.author.color)
+    if [die for die in dicepool if die.success_icon]:
+        success_icon = [die for die in dicepool if die.success_icon][0].success_icon
+        successes = sum([die.active.swords for die in dicepool])
+        fails = sum([die.active.skulls for die in dicepool])
+        if [die for die in dicepool if die.fail_icon]:
+            fail_icon = [die for die in dicepool if die.fail_icon][0].fail_icon
+            embed = discord.Embed(
+                title=title,
+                description=f'**{roll_count})** {success_icon} = {successes}         {fail_icon} = {fails}',
+                color=context.message.author.color)
+        else:
+            embed = discord.Embed(
+                title=title,
+                description=f'**{roll_count})** {success_icon} = {successes}',
+                color=context.message.author.color)
     else:
         embed = discord.Embed(title=title,
                               description=f'**{roll_count})**',

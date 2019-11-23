@@ -8,6 +8,8 @@ BLANK = Face('blank', '<:base_blank:545643568677519370>', 0, 0, 0)
 class Die:
     faces = [BLANK]
     countable = False
+    success_icon = False
+    fail_icon = False
 
     def __init__(self):
         self.active = BLANK
@@ -40,7 +42,8 @@ class TalesFromTheLoopD6(Die):
 
 
 class Base(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
+    fail_icon = '<:base_one:545643569218584638>'
     faces = [Face('base_one', '<:base_one:545643569218584638>', 1, 0, 1),
              Face('base_two', '<:base_blank:545643568677519370>', 2, 0, 0),
              Face('base_three', '<:base_blank:545643568677519370>', 3, 0, 0),
@@ -50,7 +53,7 @@ class Base(Die):
 
 
 class Skill(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
     faces = [Face('skill_one', '<:skill_blank:545643939139682314>', 1, 0, 0),
              Face('skill_two', '<:skill_blank:545643939139682314>', 2, 0, 0),
              Face('skill_three', '<:skill_blank:545643939139682314>', 3, 0, 0),
@@ -60,7 +63,7 @@ class Skill(Die):
 
 
 class Negative(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
     faces = [Face('negative_one', '<:negative_blank:583768736578797578>', 1, 0, 0),
              Face('negative_two', '<:negative_blank:583768736578797578>', 2, 0, 0),
              Face('negative_three', '<:negative_blank:583768736578797578>', 3, 0, 0),
@@ -70,7 +73,8 @@ class Negative(Die):
 
 
 class Gear(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
+    fail_icon = '<:base_one:545643569218584638>'
     faces = [Face('gear_one', '<:gear_one:587359768797118551>', 1, 0, 1),
              Face('gear_two', '<:gear_blank:545646496586924035>', 2, 0, 0),
              Face('gear_three', '<:gear_blank:545646496586924035>', 3, 0, 0),
@@ -80,7 +84,7 @@ class Gear(Die):
 
 
 class D8(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
     faces = [Face('d8_one', '<:d8_blank:545646540782436365>', 1, 0, 0),
              Face('d8_two', '<:d8_blank:545646540782436365>', 2, 0, 0),
              Face('d8_three', '<:d8_blank:545646540782436365>', 3, 0, 0),
@@ -92,7 +96,7 @@ class D8(Die):
 
 
 class D10(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
     faces = [Face('d10_one', '<:d10_blank:545646579831275541>', 1, 0, 0),
              Face('d10_two', '<:d10_blank:545646579831275541>', 2, 0, 0),
              Face('d10_three', '<:d10_blank:545646579831275541>', 3, 0, 0),
@@ -106,7 +110,7 @@ class D10(Die):
 
 
 class D12(Die):
-    countable = True
+    success_icon = '<:base_six:545643569298407444>'
     faces = [Face('d12_one', '<:d12_blank:545646598093537282>', 1, 0, 0),
              Face('d12_two', '<:d12_blank:545646598093537282>', 2, 0, 0),
              Face('d12_three', '<:d12_blank:545646598093537282>', 3, 0, 0),
