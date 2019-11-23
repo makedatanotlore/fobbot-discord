@@ -30,6 +30,7 @@ class D6(Die):
 
 
 class TalesFromTheLoopD6(Die):
+    success_icon = '<:tftl_six:598775930906869761>'
     faces = [Face('tftl_d6_one', '<:tftl_blank:598773871864315914>', 1, 0, 0),
              Face('tftl_d6_two', '<:tftl_blank:598773871864315914>', 2, 0, 0),
              Face('tftl_d6_three', '<:tftl_blank:598773871864315914>', 3, 0, 0),

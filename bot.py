@@ -218,7 +218,14 @@ async def embed_template(context, dicepool, roll_count, title=' '):
         skulls = sum([die.active.skulls for die in dicepool if die.countable])
         embed = discord.Embed(
             title=title,
-            description=f'**{roll_count})** <:grey_swords:547454438021791745>= {swords}         <:grey_skull:547454438873366528>= {skulls}',
+            description=f'**{roll_count})** <:grey_swords:547454438021791745> = {swords}         <:grey_skull:547454438873366528> = {skulls}',
+            color=context.message.author.color)
+    elif [die for die in dicepool if die.success_icon]:
+        icon = [die for die in dicepool if die.success_icon][0].success_icon
+        successes = sum([die.active.swords for die in dicepool if die.countable])
+        embed = discord.Embed(
+            title=title,
+            description=f'**{roll_count})** {icon} = {successes}',
             color=context.message.author.color)
     else:
         embed = discord.Embed(title=title,
@@ -255,4 +262,5 @@ def divide_chunks(l, n):
         yield l[i:i + n]
 
 
-client.run(TOKEN)
+client.run(TEST_TOKEN)
+
