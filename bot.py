@@ -262,5 +262,5 @@ def divide_chunks(l, n):
         yield l[i:i + n]
 
 
-client.run(TEST_TOKEN)
+client.run(TOKEN)
 
