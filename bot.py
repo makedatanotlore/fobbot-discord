@@ -88,12 +88,7 @@ async def roll(context):
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
 
-    no_shuffle = NO_SHUFFLE_REGEX.search(context.message.content)
-    
-    if no_shuffle:
-        message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
-    else: 
-        message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
+    message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
     while pushes > 0:
         if [die for die in dicepool if await die.pushable()]:
@@ -113,11 +108,7 @@ async def roll(context):
 
             embed = await embed_template(context, dicepool, roll_count, title=title)
 
-            await Message.clear_reactions(message)
-            if no_shuffle:
-                await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
-            else:
-                await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
+            await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
             pushes -= 1
         else:
@@ -270,8 +261,11 @@ async def parse_args(context):
             amount = int(result.group(1)) if result.group(1) is not '' else 1
             hand += [die() for i in range(amount)]
 
-    random.shuffle(hand)
+    no_shuffle = NO_SHUFFLE_REGEX.search(context.message.content)
+    if no_shuffle:
+        return hand
 
+    random.shuffle(hand)
     return hand
 
 
