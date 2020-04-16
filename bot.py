@@ -18,6 +18,7 @@ client.remove_command('help')
 
 GRITTERS = ['dvärg', 'dwarf', 'dvergar']
 ACTUAL_NUMBERS_REGEX = re.compile(' -an(?![a-zA-Z\d])')
+NO_SHUFFLE_REGEX = re.compile(' -ns(?![a-zA-Z\d])')
 ROLL_NAME_REGEX = re.compile(' \"(.+)\"(?![a-zA-Z\d])')
 REGEX = {re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+|)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
@@ -86,7 +87,13 @@ async def roll(context):
 
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
-    message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
+
+    no_shuffle = NO_SHUFFLE_REGEX.search(context.message.content)
+    
+    if no_shuffle:
+        message = await context.message.channel.send(''.join([die.active.emoji for die in dicepool]), embed=embed)
+    else: 
+        message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
     while pushes > 0:
         if [die for die in dicepool if await die.pushable()]:
@@ -107,7 +114,10 @@ async def roll(context):
             embed = await embed_template(context, dicepool, roll_count, title=title)
 
             await Message.clear_reactions(message)
-            await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
+            if no_shuffle:
+                await Message.edit(message, content=''.join([die.active.emoji for die in dicepool]), embed=embed)
+            else:
+                await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
             pushes -= 1
         else:
@@ -147,14 +157,19 @@ async def swedish_help(context):
                     inline=False)
     embed.add_field(name='Numrerade tärningar',
                     value='När du behöver en siffra på tärningen.\n'
+                    '(Lägg till flaggan `-an` om du vill se de faktiska siffrorna som slogs fram.)\n'
                     f'Vanlig T6 - `t6`\n',
                     inline=False)
     embed.add_field(name='Anteckningar',
                     value='När du behöver en anteckning på slaget, använd "".\n'
-                    f'`>slå 2rest8 "Mat/Vatten"`\n',
+                    f'`>slå 2rest8 "Mat/Vatten -ns"`\n'
+                    f'(här används `-ns` för att förhindra att tärningarna byter plats)\n',
+                    inline=False)
+    embed.add_field(name='Hur kan en dvärg pressa fler gånger?',
+                    value='Du behöver en Discord-roll som heter "dvärg", "dwarf" eller "dvergar".',
                     inline=False)
     embed.add_field(name='Kontakt',
-                    value='Hoppa in på https://discord.gg/BSxpaQP för att ta kontakt.',
+                    value='Hoppa in på https://discord.gg/BSxpaQP för att ta kontakt. GitHub: https://github.com/makedatanotlore/fobbot-discord',
                     inline=False)
     embed.set_footer(text='For English, type >help')
 
@@ -200,10 +215,14 @@ async def english_help(context):
                     inline=False)
     embed.add_field(name='Notes',
                     value='When you need to add a note to your roll, use "".\n'
-                    f'`>roll 2resd8 "Food/Water"`\n',
+                    f'`>roll 2resd8 "Food/Water" -ns`\n'
+                    '(in this case we add `-ns` to prevent the dice from shuffling around)\n',
+                    inline=False)
+    embed.add_field(name='How do Dwarves get more pushes?',
+                    value='You need to be assigned a Discord role called "dvärg", "dwarf", or "dvergar".',
                     inline=False)
     embed.add_field(name='Contact',
-                    value='Visit https://discord.gg/BSxpaQP to get in touch.',
+                    value='Visit https://discord.gg/BSxpaQP to get in touch. GitHub: https://github.com/makedatanotlore/fobbot-discord',
                     inline=False)
     embed.set_footer(text='För svenska, skriv >hjälp')
 
