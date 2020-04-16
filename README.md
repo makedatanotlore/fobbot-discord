@@ -49,5 +49,5 @@ For when you need an actual number on the die. You can also add `-an` to any com
 * Regular D6 - `d6`
 
 ### Notes
-When you need to add a note or comment to your roll, use "".
-`>roll 2resd8 "Food/Water"`
+When you need to add a note or comment to your roll, use "". To prevent the numbers from shuffling around, we can add the flag `-ns`.
+`>roll 2resd8 "Food/Water" -ns`
