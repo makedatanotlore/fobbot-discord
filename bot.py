@@ -41,21 +41,7 @@ roll_log = []
 
 @client.event
 async def on_ready():
-    print('='*36)
-    print(f'CONNECTED TO {len(client.guilds)} SERVERS WITH {len(client.users)} USERS')
-    print('SERVERS:')
-    for guild in client.guilds:
-        print(f'{str.upper(guild.name)} WITH {len(guild.members)} MEMBERS')
-    print('=' * 36)
     await client.change_presence(activity=Game(name=f'>help on {len(client.guilds)} servers'))
-
-
-@client.event
-async def on_disconnect():
-    print('='*36)
-    print(f'SESSION DISCONNECTED - AFTER {len(roll_log)} ROLLS')
-    for roll in roll_log:
-        print(f'{roll.guild} - {roll.user} - {[die.current.name for die in roll.dicepool]}')
 
 
 @client.command(name='slå',
