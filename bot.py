@@ -20,7 +20,8 @@ GRITTERS = ['dvärg', 'dwarf', 'dvergar']
 ACTUAL_NUMBERS_REGEX = re.compile(' -an(?![a-zA-Z\d])')
 NO_SHUFFLE_REGEX = re.compile(' -ns(?![a-zA-Z\d])')
 ROLL_NAME_REGEX = re.compile(' \"(.+)\"(?![a-zA-Z\d])')
-REGEX = {re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
+REGEX = {re.compile(' (\d+|)(d4|t4)(?![a-zA-Z\d])'): dice.D4,
+         re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+|)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
          re.compile(' (\d+|)(sk|fv)(?![a-zA-Z\d])'): dice.Skill,
          re.compile(' (\d+|)(gr|rd|vp|wp)(?![a-zA-Z\d])'): dice.Gear,
@@ -135,6 +136,7 @@ async def swedish_help(context):
     embed.add_field(name='Numrerade tärningar',
                     value='När du behöver en siffra på tärningen.\n'
                     '(Lägg till flaggan `-an` om du vill se de faktiska siffrorna som slogs fram.)\n'
+                    f'Vanlig T4 - `t4`\n'
                     f'Vanlig T6 - `t6`\n',
                     inline=False)
     embed.add_field(name='Anteckningar',
@@ -187,6 +189,7 @@ async def english_help(context):
                     inline=False)
     embed.add_field(name='Numbered Dice',
                     value='When you need an actual number on the die.\n'
+                    f'Regular D4 - `d4`\n'
                     f'Regular D6 - `d6`\n'
                     f'*Using `-an` to get **ALL** the numbers is the 9bee\'s knees.*',
                     inline=False)

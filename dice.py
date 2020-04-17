@@ -22,6 +22,12 @@ class Die:
         return self.active.swords == 0 and self.active.skulls == 0
 
 
+class D4(Die):
+    faces = [Face('d6_one', '<:d6_one:583200701761585153>', 1, 0, 1),
+             Face('d6_two', '<:d6_two:583200702403444736>', 2, 0, 1),
+             Face('d6_three', '<:d6_three:583200702072094730>', 3, 0, 1),
+             Face('d6_four', '<:d6_four:583200701644275713>', 4, 0, 1)]
+
 class D6(Die):
     faces = [Face('d6_one', '<:d6_one:583200701761585153>', 1, 0, 1),
              Face('d6_two', '<:d6_two:583200702403444736>', 2, 0, 1),
