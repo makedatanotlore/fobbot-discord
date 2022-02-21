@@ -20,6 +20,7 @@ GRITTERS = ['dvärg', 'dwarf', 'dvergar']
 ACTUAL_NUMBERS_REGEX = re.compile(' -an(?![a-zA-Z\d])')
 NO_SHUFFLE_REGEX = re.compile(' -ns(?![a-zA-Z\d])')
 ROLL_NAME_REGEX = re.compile(' \"(.+)\"(?![a-zA-Z\d])')
+PLAIN_TEXT_REGEX = re.compile(' -pt(?![a-zA-Z\d])')
 REGEX = {re.compile(' (\d+|)(d4|t4)(?![a-zA-Z\d])'): dice.D4,
          re.compile(' (\d+|)(d6|t6)(?![a-zA-Z\d])'): dice.D6,
          re.compile(' (\d+|)(ba|ge)(?![a-zA-Z\d])'): dice.Base,
@@ -75,7 +76,10 @@ async def roll(context):
     roll_count = 1
     embed = await embed_template(context, dicepool, roll_count, title=title)
 
-    message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
+    if PLAIN_TEXT_REGEX.search(context.message.content):
+        message = await context.message.channel.send('\n'.join(', '.join([''.join([type(die).__name__, ': ', str(die.active.pips)]) for die in dicepool])), embed=embed)
+    else:
+        message = await context.message.channel.send('\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
     while pushes > 0:
         if [die for die in dicepool if await die.pushable()]:
@@ -139,6 +143,10 @@ async def swedish_help(context):
                     f'Vanlig T4 - `t4`\n'
                     f'Vanlig T6 - `t6`\n',
                     inline=False)
+    embed.add_field(name='Plain Text',
+                    value='When you need to output numbers instead of emojis.\n'
+                    f'`>roll 5ba 2sk 2gr d8 -pt`',
+                    inline=False)
     embed.add_field(name='Anteckningar',
                     value='När du behöver en anteckning på slaget, använd "".\n'
                     f'`>slå 2rest8 "Mat/Vatten -ns"`\n'
@@ -192,6 +200,10 @@ async def english_help(context):
                     f'Regular D4 - `d4`\n'
                     f'Regular D6 - `d6`\n'
                     f'*Using `-an` to get **ALL** the numbers is the 9bee\'s knees.*',
+                    inline=False)
+    embed.add_field(name='Plain Text',
+                    value='When you need to output numbers instead of emojis.\n'
+                    f'`>roll 5ba 2sk 2gr d8 -pt`',
                     inline=False)
     embed.add_field(name='Notes',
                     value='When you need to add a note to your roll, use "".\n'
