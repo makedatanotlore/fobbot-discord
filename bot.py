@@ -100,7 +100,7 @@ async def roll(context):
             embed = await embed_template(context, dicepool, roll_count, title=title)
 
             if PLAIN_TEXT_REGEX.search(context.message.content):
-                await Message.edit(message, content='\n'.join(', '.join([''.join([type(die).__name__, ': ', str(die.active.pips)]) for die in dicepool])), embed=embed)
+                await Message.edit(message, content=', '.join([''.join([type(die).__name__, ': ', str(die.active.pips)]) for die in dicepool]), embed=embed)
             else:
                 await Message.edit(message, content='\n'.join(''.join([die.active.emoji for die in chunk]) for chunk in list(divide_chunks(dicepool, 6))), embed=embed)
 
