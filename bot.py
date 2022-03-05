@@ -147,8 +147,8 @@ async def swedish_help(context):
                     f'Vanlig T6 - `t6`\n',
                     inline=False)
     embed.add_field(name='Plain Text',
-                    value='When you need to output numbers instead of emojis.\n'
-                    f'`>roll 5ba 2sk 2gr d8 -pt`',
+                    value='Använd `-pt` när du behöver siffror istället för själva tärningarna.\n'
+                    f'`>slå 5ge 2fv 2rd t8 -pt`',
                     inline=False)
     embed.add_field(name='Anteckningar',
                     value='När du behöver en anteckning på slaget, använd "".\n'
